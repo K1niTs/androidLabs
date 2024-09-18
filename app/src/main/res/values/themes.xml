@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MyApplication" parent="Theme.Material3.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="android:textColorPrimary">@color/primaryText</item>
+        <item name="android:textColorSecondary">@color/secondaryText</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+    </style>
+
+    <style name="MyActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="android:background">@color/actionBarBackground</item>
+        <item name="android:height">56dp</item>
+    </style>
+
+</resources>

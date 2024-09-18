@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/onboard_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:text="Добро пожаловать в мессенджер Рика!"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/onboard_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Быстрое и удобное общение"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/onboard_image"
+        android:layout_width="wrap_content"
+        android:layout_height="361dp"
+        android:src="@drawable/onboard_image" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:accessibilityLiveRegion="assertive"
+        android:background="#8BC34A"
+        android:backgroundTint="#4CAF50"
+        android:text="Вход"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+</LinearLayout>

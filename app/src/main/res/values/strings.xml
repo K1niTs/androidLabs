@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyApplication</string>
+    <string name="title_activity_onboard">Onboard</string>
+    <string name="title_activity_signin">Sign In</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_signup">Sign Up</string>
+</resources>
