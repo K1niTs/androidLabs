@@ -9,7 +9,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/signin_image"
+        android:id="@+id/signin"
         android:layout_width="343dp"
         android:layout_height="248dp"
         android:layout_gravity="center"

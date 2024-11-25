@@ -1,49 +1,35 @@
 package com.example.myapplication
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.myapplication.databinding.FragmentOnboardBinding
 
-class OnboardActivity : AppCompatActivity() {
+class OnboardFragment : Fragment() {
 
-    private val TAG = "OnboardActivity"
+    private var _binding: FragmentOnboardBinding? = null
+    private val binding get() = _binding!!
+    private val TAG = "OnboardFragment"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboard)
-        Log.d(TAG, "onCreate")
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentOnboardBinding.inflate(inflater, container, false)
+        Log.d(TAG, "onCreateView")
 
-        val nextButton: Button = findViewById(R.id.next_button)
-        nextButton.setOnClickListener {
-            val intent = Intent(this, SigninActivity::class.java)
-            startActivity(intent)
+        binding.nextButton.setOnClickListener {
+            (activity as MainActivity).navigateToSignIn()
         }
+
+        return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy")
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

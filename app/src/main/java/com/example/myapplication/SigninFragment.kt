@@ -11,61 +11,61 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import com.example.myapplication.databinding.FragmentSigninBinding
 
 class SignInFragment : Fragment() {
 
+    private var _binding: FragmentSigninBinding? = null
+    private val binding get() = _binding!!
+    private val args: SignInFragmentArgs by navArgs()
     private val TAG = "SignInFragment"
-    private val correctEmail = "1"
-    private val correctPassword = "1"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_signin, container, false)
+        _binding = FragmentSigninBinding.inflate(inflater, container, false)
         Log.d(TAG, "onCreateView")
 
-        val emailInput: EditText = view.findViewById(R.id.email_input)
-        val passwordInput: EditText = view.findViewById(R.id.password_input)
-        val errorMessage: TextView = view.findViewById(R.id.error_message)
-        val signinButton: Button = view.findViewById(R.id.signin_button)
-        val registerButton: Button = view.findViewById(R.id.register_button)
+        binding.emailInput.setText(args.userEmail)
+        binding.passwordInput.setText(args.userPassword)
 
-        signinButton.setOnClickListener {
-            val enteredEmail = emailInput.text.toString()
-            val enteredPassword = passwordInput.text.toString()
+        binding.signinButton.setOnClickListener {
+            val enteredEmail = binding.emailInput.text.toString()
+            val enteredPassword = binding.passwordInput.text.toString()
 
-            if (enteredEmail == correctEmail && enteredPassword == correctPassword) {
+            if (enteredEmail == "1" && enteredPassword == "1") {
                 (activity as MainActivity).navigateToHome()
             } else {
-                errorMessage.visibility = TextView.VISIBLE
+                binding.errorMessage.visibility = TextView.VISIBLE
             }
         }
 
-        registerButton.setOnClickListener {
+        binding.registerButton.setOnClickListener {
             (activity as MainActivity).navigateToSignUp()
         }
 
-        val textWatcher = object : TextWatcher {
+        binding.emailInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                errorMessage.visibility = TextView.GONE
+                binding.errorMessage.visibility = TextView.GONE
             }
-
             override fun afterTextChanged(s: Editable?) {}
-        }
+        })
 
-        emailInput.addTextChangedListener(textWatcher)
-        passwordInput.addTextChangedListener(textWatcher)
+        binding.passwordInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.errorMessage.visibility = TextView.GONE
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
-        return view
+        return binding.root
     }
 
-    // Метод для получения результата из SignUpFragment
-    fun handleSignUpResult(name: String?, email: String?, password: String?, user: User?) {
-        Log.d(TAG, "User registered: $name, $email, $password")
-        Log.d(TAG, "User object: $user")
-
-        view?.findViewById<EditText>(R.id.email_input)?.setText(email)
-        view?.findViewById<EditText>(R.id.password_input)?.setText(password)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

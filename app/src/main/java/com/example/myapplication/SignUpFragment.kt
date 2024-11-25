@@ -1,34 +1,44 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.example.myapplication.databinding.FragmentSignupBinding
 
 class SignUpFragment : Fragment() {
+
+    private var _binding: FragmentSignupBinding? = null
+    private val binding get() = _binding!!
+    private val TAG = "SignUpFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_signup, container, false)
+        _binding = FragmentSignupBinding.inflate(inflater, container, false)
 
-        val nameInput: EditText = view.findViewById(R.id.name_input)
-        val emailInput: EditText = view.findViewById(R.id.email_input)
-        val passwordInput: EditText = view.findViewById(R.id.password_input)
-        val registerButton: Button = view.findViewById(R.id.register_button)
+        binding.registerButton.setOnClickListener {
+            val name = binding.nameInput.text.toString()
+            val email = binding.emailInput.text.toString()
+            val password = binding.passwordInput.text.toString()
 
-        registerButton.setOnClickListener {
-            val name = nameInput.text.toString()
-            val email = emailInput.text.toString()
-            val password = passwordInput.text.toString()
-
-            val user = User(name, email, password)
-            (activity as MainActivity).onUserRegistered(user)
+            if (name.isNotBlank() && email.isNotBlank() && password.isNotBlank()) {
+                val user = User(name, email, password)
+                (activity as MainActivity).onUserRegistered(user)
+            } else {
+                Log.d(TAG, "Registration failed: Fields cannot be empty")
+            }
         }
 
-        return view
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
