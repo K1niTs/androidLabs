@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -14,7 +13,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.fragment_home)
         Log.d(TAG, "onCreate")
 
         val chatList = listOf(
